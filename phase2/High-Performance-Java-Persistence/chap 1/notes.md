@@ -1,11 +1,13 @@
-#Performance and Scaling
+# Performance and Scaling
+
 The most important metrics in an entreprise application are response time and throughput 
 lower time of the response = more responsive app
 
 throughput : is the amount of work, data, or materials a system processes or produces within a specific time frame
 
+---
 
-##Response time and throughput
+## Response time and throughput
 
 transaction response time means the time it takes to complete a transaction 
 -starting from the connection 
@@ -49,7 +51,10 @@ C(N) = relative throughput you actually get (compared to 1 connection)
 If `N > N_max`, adding connections *reduces* throughput (retrograde scalability).  
 → Tune connection pools using measured α/β; don't just "add more".
 
-##Database connections boundaries
+---
+
+## Database connections boundaries
+
 Every connection client -> server requires a TCP socket
 the number of the connection depends heavily on the underlying hardware resources and how many connections the server can handle 
 
@@ -58,8 +63,10 @@ Even if all indexes are entirely cached in memory,disk access might still occur 
 high-throughput database applications experience contention on CPU
 When all the database server resources are in use, adding more workload only increases contention(conflictss)
 
+---
 
-##Scaling up and scaling out
+## Scaling up and scaling out
+
 Scaling Up (Vertical): Add more resources (CPU, RAM, storage) to a single machine. 
 Simpler to manage but limited by hardware caps and creates a single point of failure.
 
@@ -73,6 +80,7 @@ Key Takeaway: No single server is immune to failure—database replication is es
 
 Decision Factors: Consider hardware/license costs, operational complexity, performance needs, and resilience requirements.
 
+---
 
 ### Master-Slave replication
 
