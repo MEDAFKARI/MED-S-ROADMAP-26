@@ -104,3 +104,29 @@ Scaling Reads: Offloading read traffic to Slaves reduces Master contention and i
 
 Limitation: If write traffic overwhelms the Master, consider switching to Multi-Master replication.
 
+---
+
+### Multi-Master replication
+
+Multi-master replication all nodes are equal and they both can accet read-only and read-write operations 
+
+this splitting algorithm can increase the transaction throughtput 
+
+cost:
+
+-The same data can be modified concurrently in multiple nodes so theres some high possibility of conflicting updates 
+
+-No longer a single source of truth, a fail in one node can rollback all the writes in all nodes 
+
+To avoid conflicts :
+
+-Commit protocol can be used to enlist all participating nodes in one distributed transaction. This design allows all nodes to be in sync at all time, at the cost of increasing transaction response time 
+
+Although avoiding conflicts is better from a data consistency perspective, 
+
+synchronous replication might incur high transaction response times. 
+
+asynchronous replication can provide better throughput,
+
+The asynchronous Multi-Master replication requires a conflict detection and an automatic
+conflict resolution algorithm.
