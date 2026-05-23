@@ -130,3 +130,25 @@ asynchronous replication can provide better throughput,
 
 The asynchronous Multi-Master replication requires a conflict detection and an automatic
 conflict resolution algorithm.
+
+---
+### Sharding
+
+sharding means distributring data across multiple nodes so each node contains a subset of data
+
+which means data is spread across multiple machines
+
+So shared must be stateful cuz the user should be using the data from only a single shard
+
+Joinning tables is prohibited => long transaction time because of networking 
+
+By reducing data size per node indexes also require less space, and they can better fit into
+main memory With less data to query the transaction response time can also get shorter
+too
+
+In the quest for increasing system capacity, sharding is usually a last resort strategy,employed
+after exhausting all other available options, such as:
+• optimizing the data layer to deliver lower transaction response times
+• scaling each replicated node to a cost-effective configuration
+• adding more replicated nodes until synchronization latencies start dropping below an
+acceptable threshold
