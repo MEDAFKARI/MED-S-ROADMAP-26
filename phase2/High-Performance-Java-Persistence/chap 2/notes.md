@@ -47,3 +47,33 @@ Diffrence between DriverManager and Datasource interface
 DriverManager : creates a physicall connection everytime you invoke getConnection()
 Datasource : creates a logical connection (that uses an existent physical connection) when you invoking getConnection()
 
+#### Pooling (Why pooling is actually faster)
+
+understanding the pooling mechanism :
+
+1. When a connection is being requested, the pool looks for unallocated connections.
+2. If the pool finds a free one, it will be handled to the client.
+3. If there is no free connection, the pool will try to grow to its maximum allowed size.
+4. If the pool already reached its maximum size, it will retry several times before giving up
+with a connection acquisition failure exception.
+5. When the client closes the logical connection, the connection is released and returns to
+the pool without closing the underlying physical connection.
+
+So most of connection pooling solutions uses datasource instead of driverManager 
+(which means) using logical connections instead of physical ones 
+
+
+
+All the benefits of pooling come at a price which means 
+
+provisioning the connection pooling requires an understanding of application specific database access 
+
+and connection usage monitoring 
+
+when the incoming requests surpases the available request handlers there are 
+
+2 options to go with the first one is discarding and get rid of the overflowing trafic 
+
+and the second one is wait for busy resource to become available 
+
+the relation between the queue size and the average enqueuing time is given by one of the most fundamental laws of queuing theory.
