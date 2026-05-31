@@ -92,3 +92,10 @@ Little's law How can we calculate the connection we need in a pool
 
 
 
+### Practical database connection provisioning
+
+Stop guessing connection pool sizes—monitor real usage patterns and let metrics drive your provisioning decisions.
+Track percentiles (p99), not averages, to see what your worst-case users actually experience during traffic spikes.
+Use adaptive failover strategies: grow the pool on timeout for batch jobs, retry intelligently, but fail fast for user-facing apps.
+Watch connection lease time—long-running transactions silently starve other requests and kill parallelism.
+Let tools like FlexyPool auto-tune your pool: start small, observe, and let the system find the right size experimentally.
