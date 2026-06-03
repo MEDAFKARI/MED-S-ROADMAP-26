@@ -77,3 +77,25 @@ when the incoming requests surpases the available request handlers there are
 and the second one is wait for busy resource to become available 
 
 the relation between the queue size and the average enqueuing time is given by one of the most fundamental laws of queuing theory.
+
+### Queuing theory capacity planning
+
+Little's law How can we calculate the connection we need in a pool 
+
+
+🔹 Little's Law: L = λ × W → Avg. requests in system = Arrival rate × Avg. time in system.
+🔹 Baseline pool size: For 50 req/s arrival and 100ms response time → 50 × 0.1 = 5 connections needed for steady-state.
+🔹 Throughput limit: μ = Pool Size / Lease Time → A pool of 5 with 100ms lease time delivers max 50 connections/sec.
+🔹 Saturation point: When arrival rate (λ) equals throughput (μ), all connections are busy; any extra requests get queued.
+🔹 Burst impact: A 3-second spike of 250 req/s (750 total) with μ=50 req/s takes 15 seconds to fully drain → queue grows to ~700 requests.
+🔹 Practical rule: Size pools for peak load + headroom, monitor queue depth, and test with bursts to avoid latency spikes.
+
+
+
+### Practical database connection provisioning
+
+Stop guessing connection pool sizes—monitor real usage patterns and let metrics drive your provisioning decisions.
+Track percentiles (p99), not averages, to see what your worst-case users actually experience during traffic spikes.
+Use adaptive failover strategies: grow the pool on timeout for batch jobs, retry intelligently, but fail fast for user-facing apps.
+Watch connection lease time—long-running transactions silently starve other requests and kill parallelism.
+Let tools like FlexyPool auto-tune your pool: start small, observe, and let the system find the right size experimentally.
